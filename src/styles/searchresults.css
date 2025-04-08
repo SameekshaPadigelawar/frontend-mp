@@ -1,0 +1,151 @@
+/* General body styling */
+.search-results-container body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #121212, #1e1e1e);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main container */
+.search-results-container .main-container {
+    display: flex;
+    margin: 40px;
+    margin-left: 160px;
+    margin-top: 80px;
+    width: 90%;
+    max-width: 1200px;
+    height: 80vh;
+    background: #181818;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.2);
+    overflow: hidden;
+
+}
+
+/* Left side - Video Section */
+.search-results-container .video-container {
+    width: 40%;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.search-results-container .video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Right side - Tailors list */
+.search-results-container .results-container {
+    width: 60%;
+    padding: 20px;
+    overflow-y: auto;
+    background: #222;
+    color: #ddd;
+}
+
+/* Search Results Container */
+.search-results-container .search-results-wrapper {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Search results section */
+.search-results-container .search-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Tailor card styling */
+.search-results-container .tailor-card {
+    background: #252525;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 255, 255, 0.2);
+    padding: 15px;
+    width: 280px;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.search-results-container .tailor-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+}
+
+/* Tailor details text */
+.search-results-container .tailor-card h3 {
+    color: #0ef;
+}
+
+.search-results-container .tailor-card p {
+    font-size: 14px;
+    color: #bbb;
+    margin: 5px 0;
+}
+
+/* Request button styling */
+.search-results-container .request-btn {
+    background: #0ef;
+    color: #222;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-results-container .request-btn:hover {
+    background: #00bcd4;
+    box-shadow: 0 0 10px #00bcd4;
+}
+
+/* Scrollbar for results */
+.search-results-container .results-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-results-container .results-container::-webkit-scrollbar-thumb {
+    background: #0ef;
+    border-radius: 6px;
+}
+
+.search-results-container .results-container::-webkit-scrollbar-track {
+    background: #333;
+}
+
+
+.search-results-container .back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-results-container .back-button:hover {
+    background-color: #5a6268;
+  }
+  

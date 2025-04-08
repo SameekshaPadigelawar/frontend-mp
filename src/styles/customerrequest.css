@@ -1,0 +1,176 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General Page Styling */
+.customer-request-page {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Ensure full page height */
+}
+
+/* Header Styling */
+.customer-request-page header {
+    background: #007bff !important;
+    color: white !important;
+    padding: 25px 15px; /* Added more padding to increase header height */
+    text-align: center;
+    width: 100%;
+    font-size: 26px; /* Increased font size */
+    font-weight: 600;
+    min-height: 120px; /* Added minimum height for better appearance */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Navigation Bar */
+.customer-request-page nav {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.customer-request-page nav a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+    margin: 0 15px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.customer-request-page nav a:hover {
+    color: #0056b3;
+}
+
+/* Request Form Container */
+.customer-request-page .request-container {
+    background: white;
+    width: 60%;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 40px; /* Increased margin to add space between header and form */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Form Heading */
+.customer-request-page h2 {
+    text-align: center;
+    color: #007bff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Form Labels */
+.customer-request-page label {
+    font-weight: 600;
+    display: block;
+    padding: 3px;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Form Inputs */
+.customer-request-page input,
+.customer-request-page textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Focus Effect */
+.customer-request-page input:focus,
+.customer-request-page textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Textarea Styling */
+.customer-request-page textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* Submit Button */
+.customer-request-page .submit-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.customer-request-page .submit-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #003d80);
+    transform: scale(1.03);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .customer-request-page .request-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    /* Adjust the header size for smaller screens */
+    .customer-request-page header {
+        font-size: 22px;
+        min-height: 100px;
+    }
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+.customer-request-page .back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .customer-request-page .back-button:hover {
+    background-color: #5a6268;
+  }
+  

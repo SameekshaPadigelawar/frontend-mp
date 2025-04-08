@@ -1,0 +1,228 @@
+/* .submit-review-container {
+    width: 60%;
+    margin: auto;
+    padding: 30px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .submit-review-container h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .submit-review-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .submit-review-container .input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .submit-review-container .rating-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .submit-review-container .rating-container input {
+    margin: 0;
+  }
+  
+  .submit-review-container textarea {
+    width: 100%;
+    padding: 10px;
+    height: 150px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .submit-review-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-review-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .submit-review-container .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+  
+  .submit-review-container .success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .submit-review-container .back-button {
+    background-color: #f8f9fa;
+    border: 1px solid #007bff;
+    color: #007bff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+  }
+  
+  .submit-review-container .back-button:hover {
+    background-color: #007bff;
+    color: white;
+  }
+   */
+
+
+
+/* Container for the review submission form */
+.submit-review-container {
+    width: 50%;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Title styling */
+  .submit-review-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  /* Flexbox container for rating and comment section */
+  .review-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  /* Rating section styling */
+  .rating-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .rating-box label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .rating-dropdown {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+  }
+  
+  /* Comment section styling */
+  .comment-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .comment-box label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .comment-textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    resize: none;
+    margin-bottom: 20px;
+  }
+  
+  /* Button styling */
+  .submit-button {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .submit-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  /* Error and Success message styling (optional) */
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .success-message {
+    color: green;
+    margin-top: 10px;
+  }
+  
+
+
+
+  .back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #5a6268;
+  }
+  

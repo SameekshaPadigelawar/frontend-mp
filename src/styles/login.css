@@ -1,0 +1,148 @@
+/* Full Page Styling */
+/* .loginpage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* background: linear-gradient(to right, #6b11cbbb, #2574fcc1); 
+    background: linear-gradient(135deg, #e0eafc, #cfdef3);  Soft blue gradient 
+     background:white; 
+    font-family: 'Arial', sans-serif;
+  } */
+  
+
+
+
+  .loginpage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #e0eafc, #cfdef3); /* Soft blue gradient */
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    backdrop-filter: blur(8px); /* Subtle blur effect */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* .loginpage::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; */
+    /* background: url('/images/bg-pattern.png') repeat; Optional: clean pattern overlay */
+    /* opacity: 0.05; /* Very subtle 
+    z-index: 0;
+  } */
+  
+  /* .loginpage > * {
+    position: relative;
+    z-index: 1;
+  } */
+  
+
+
+
+
+
+  /* Login Container */
+  .loginpage .container {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  /* Heading */
+  .loginpage .container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Error Message */
+  .loginpage .error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    background: #ffe6e6;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  
+  /* Input Group */
+  .loginpage .input-group {
+    margin-bottom: 18px;
+    text-align: left;
+  }
+  
+  .loginpage .input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 6px;
+  }
+  
+  .loginpage .input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .loginpage .input-group input:focus {
+    border-color: #2575fc;
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(37, 117, 252, 0.5);
+  }
+  
+  /* Login Button */
+  .loginpage button {
+    width: 100%;
+    padding: 12px;
+    background: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .loginpage button:hover {
+    background: #1a5bcc;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .loginpage .login-container {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+  .signup-suggestion {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .signup-link {
+    color: #2575fc;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .signup-link:hover {
+    text-decoration: underline;
+  }
+  

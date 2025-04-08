@@ -1,0 +1,79 @@
+.tailor-reviews-container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .tailor-reviews-container h2 {
+    color: #007bff;
+  }
+  
+  .tailor-reviews-container .toggle-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  
+  .tailor-reviews-container .toggle-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .tailor-reviews-container .reviews-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .tailor-reviews-container .review-item {
+    background: #ffffff;
+    padding: 15px;
+    margin: 8px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333; /* Ensure text is visible */
+  }
+  
+  .tailor-reviews-container .review-item strong {
+    color: #007bff; /* Add color for labels */
+  }
+  
+  .tailor-reviews-container  .review-item p {
+    color: #333; /* Make sure the text in paragraphs is visible */
+  }
+  
+  .tailor-reviews-container .no-reviews {
+    font-size: 16px;
+    color: #777;
+  }
+  
+
+
+
+  .tailor-reviews-container .back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .tailor-reviews-container .back-button:hover {
+    background-color: #5a6268;
+  }
+  

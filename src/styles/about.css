@@ -1,0 +1,40 @@
+
+/* About Section */
+.about {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: left;
+}
+
+.about .content {
+    background: #1e1e1e;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.2);
+}
+
+.about h2 {
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.about p {
+    font-size: 16px;
+    color: #d9d9d9;
+    line-height: 1.6;
+}
+
+.about ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about ul li {
+    background: rgba(255, 152, 0, 0.2);
+    padding: 12px;
+    margin: 6px 0;
+    border-radius: 5px;
+    font-size: 16px;
+}

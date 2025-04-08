@@ -1,0 +1,262 @@
+/* General Page Styling */
+ 
+.service-container {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7; /* Light Gray Background */
+    color: #333;
+    width: 100%;
+}
+
+/* Header Styling */
+.service-container h2 {
+    background-color: #ff7f50; /* Coral color */
+    color: white;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Styling */
+.service-container nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.service-container nav a {
+    text-decoration: none;
+    color: #ff7f50; /* Coral */
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.service-container nav a:hover {
+    background-color: #ff7f50; /* Coral */
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Tailor Card Container */
+.service-container .tailor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Tailor Card Styling (Full Width) */
+ .service-container .tailor-card {
+    background-color: white;
+    border-radius: 12px;
+    width: 60%;
+    max-width: 100%; /* Ensures full width of parent */
+    padding: 20px;
+    margin: 0 auto 20px auto; /*Centers the container */
+    border: 1px solid whitesmoke;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; 
+} 
+ 
+
+/* Tailor Image */
+.service-container .tailor-card img {
+    width: 150px; /* Adjust size as needed */
+    height: 150px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-right: 20px;
+    margin-left: 30px;
+    margin-top: 40px;
+    float: left;
+    border: 2px solid black;
+}
+
+
+
+
+/* Hover Effect for Tailor Cards */
+.service-container .tailor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Tailor Card Title */
+.service-container .tailor-card h3 {
+    font-size: 24px;
+    color: #ff7f50; /* Coral color */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Tailor Card Details */
+.service-container .tailor-card p {
+    font-size: 16px;
+    text-align:left;
+    padding-left: 250px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Tailor Card Skills */
+.service-container .tailor-card .skills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.service-container .tailor-card .skills span {
+    background-color: #ff7f50; /* Coral */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* Tailor Contact and Availability */
+.service-container .tailor-card .contact,
+.service-container .tailor-card .availability {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+/* Submit Button */
+.service-container .submit-btn {
+    background: #ff7f50; /* Coral */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 15px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.service-container .submit-btn:hover {
+    background: #e95c3f; /* Darker Coral */
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .service-container .tailor-card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .service-container .tailor-card {
+        width: 100%;
+    }
+}
+
+
+/* services.css */
+.service-container .show-reviews-button, .rate-button , .request-button{
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    margin:20px;
+    background-color: #e95c3f;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .service-container  .show-reviews-button:hover, .rate-button:hover, .request-button {
+    background-color:  #e95c3f;
+  }
+  
+  /* .service-container  .request-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .service-container .request-button:hover {
+    background-color: #218838;
+  } */
+
+ 
+
+   
+  .service-container .search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    gap: 10px;
+  }
+  
+   
+  .service-container .search-bar {
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+  }
+  
+   
+  .service-container .search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+   
+  .service-container .search-button:hover {
+    background-color: #0056b3;
+  }
+  
+
+
+  .service-container .header-with-back {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+  }
+  
+  .service-container .back-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .service-container .back-button:hover {
+    background-color: #5a6268;
+  }
+  
+  
+  
