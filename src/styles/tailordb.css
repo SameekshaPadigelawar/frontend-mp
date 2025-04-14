@@ -1,0 +1,364 @@
+/* Root settings
+:root {
+  --bg-color: #fdf7f0;
+  --primary-brown: #6e3b1e;
+  --light-brown: #a86c4b;
+  --accent-cream: #fff6e9;
+  --text-dark: #3b2a1a;
+  --accept-green: #4CAF50;
+  --reject-red: #E53935;
+  --shadow: 0 4px 12px rgba(110, 59, 30, 0.15);
+  --radius: 12px;
+  --transition: all 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+}
+
+
+.tailor-container {
+  padding: 30px;
+}
+
+
+.dashboard-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+
+.left-panel {
+  flex: 1;
+  max-width: 360px;
+  background: var(--accent-cream);
+  padding: 25px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.left-panel h1 {
+  color: var(--primary-brown);
+  font-size: 22px;
+}
+
+.profile-picture {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  border-radius: var(--radius);
+  border: 3px solid var(--light-brown);
+  margin: 20px 0;
+}
+
+.user-details p {
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+ 
+.right-panel {
+  flex: 2;
+  background: var(--accent-cream);
+  padding: 25px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  min-width: 300px;
+}
+
+ 
+.toggle-btn {
+  margin-bottom: 20px;
+}
+
+ .requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.request-card {
+  background: #fff;
+  border-left: 6px solid var(--light-brown);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.request-card:hover {
+  transform: translateY(-2px);
+}
+
+.request-card h3 {
+  margin: 0 0 8px;
+  color: var(--primary-brown);
+}
+
+.request-card p {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+ 
+.action-buttons {
+  margin-top: 12px;
+}
+
+button {
+  border: none;
+  padding: 10px 16px;
+  margin-right: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: rgb(0, 157, 255);
+  transition: var(--transition);
+}
+ 
+.accept-button {
+  background-color: var(--accept-green);
+  color: white;
+}
+
+.accept-button:hover {
+  background-color: #3e8e41;
+}
+ 
+.reject-button {
+  background-color: var(--reject-red);
+  color: white;
+}
+
+.reject-button:hover {
+  background-color: #c62828;
+}
+ 
+.logout-button1 {
+  background: #b0413e;
+  color: white;
+  margin-top: 20px;
+}
+
+.logout-button1:hover {
+  background: #8a2d2b;
+}
+
+.back-button {
+  background-color: #c2a17d;
+  color: white;
+  margin-top: 10px;
+}
+
+.back-button:hover {
+  background-color: #9f7e5e;
+}
+
+ 
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    flex-direction: column;
+  }
+
+  .left-panel,
+  .right-panel {
+    max-width: 100%;
+  }
+} */
+
+
+
+
+
+
+
+
+
+
+
+:root {
+  --bg-color: #1e1b18;
+  --panel-bg: #2a2623;
+  --text-light: #f1e9e0;
+  --primary-brown: #a97458;
+  --light-brown: #d2a679;
+  --accept-green: #4CAF50;
+  --reject-red: #E53935;
+  --card-bg: #2e2a27;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --radius: 12px;
+  --transition: all 0.3s ease;
+}
+
+.tailor-container body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-light);
+}
+
+  .tailor-container {
+  padding: 30px;
+}
+
+.tailor-container .dashboard-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.tailor-container .left-panel {
+  flex: 1;
+  max-width: 360px;
+  background: var(--panel-bg);
+  padding: 25px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.tailor-container .left-panel h1 {
+  color: var(--light-brown);
+  font-size: 22px;
+}
+
+.tailor-container .profile-picture {
+  width: 100%;
+  max-width: 240px;
+  border-radius: var(--radius);
+  border: 3px solid var(--light-brown);
+  margin: 20px 0;
+}
+
+.tailor-container .user-details p {
+  margin: 8px 0;
+  font-size: 15px;
+  color: var(--text-light);
+}
+
+.tailor-container .right-panel {
+  flex: 2;
+  background: var(--panel-bg);
+  padding: 25px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  min-width: 300px;
+}
+
+.tailor-container .toggle-btn {
+  margin-bottom: 20px;
+}
+
+.tailor-container .requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tailor-container .request-card {
+  background: var(--card-bg);
+  border-left: 6px solid var(--primary-brown);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.tailor-container .request-card:hover {
+  transform: translateY(-2px);
+}
+
+.tailor-container .request-card h3 {
+  margin: 0 0 8px;
+  color: var(--light-brown);
+}
+
+.tailor-container .request-card p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: var(--text-light);
+}
+
+.tailor-container .action-buttons {
+  margin-top: 12px;
+}
+
+.tailor-container button {
+  border: none;
+  padding: 10px 16px;
+  margin-right: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+/* Accept Button */
+.tailor-container .accept-button {
+  background-color: var(--accept-green);
+  color: white;
+}
+
+.tailor-container .accept-button:hover {
+  background-color: #3e8e41;
+}
+
+/* Reject Button */
+.tailor-container .reject-button {
+  background-color: var(--reject-red);
+  color: white;
+}
+
+.tailor-container .reject-button:hover {
+  background-color: #c62828;
+}
+
+/* Logout and Back Buttons */
+.tailor-container .logout-button1 {
+  background: #d46c62;
+  color: white;
+  margin-top: 20px;
+}
+
+.tailor-container .back-button {
+  background: #d46c62;
+  color: white;
+  margin-top: 20px;
+}
+.tailor-container .logout-button1:hover {
+  background: #b5564d;
+}
+
+.tailor-container .back-button { 
+  background-color: #7e5e44; 
+   background-color: #d46c62;
+   position: fixed;
+  color: white;
+  margin-top: 575px;
+  margin-left: 160px;
+ }
+
+.tailor-container .back-button:hover {
+  background-color: #5d4433;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tailor-container .dashboard-wrapper {
+    flex-direction: column;
+  }
+
+  .tailor-container .left-panel,
+  .tailor-container .right-panel {
+    max-width: 100%;
+  }
+}
+.tailor-container .button-group {
+  display: flex;
+  justify-content: flex-start; /* Align buttons to the left */
+  gap: 10px;
+  margin-top: 20px;
+}

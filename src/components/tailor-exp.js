@@ -1,274 +1,12 @@
+// // Keep your imports same
 // import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
-// import "../styles/tailordashboard.css"; 
+// import "../styles/tailordb.css";
 
 // const TailorDashboard = () => {
 //   const [tailor, setTailor] = useState(null);
 //   const [requests, setRequests] = useState([]);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  
-//     if (!loggedInUser) {
-//       navigate("/login");
-//       return;
-//     }
-  
-//     if (loggedInUser.role !== "tailor") {
-//       alert("Access denied! Only tailors can access this page.");
-//       navigate("/login");
-//       return;
-//     }
-  
-//     setTailor(loggedInUser);
-    
-//   }, [navigate]);
-  
-
-
-//   const handleBack = () => {
-//     navigate("/");
-//   };
-
-//   const handleLogout1 = () => {
-//     localStorage.removeItem("loggedInUser");
-//     navigate("/");
-//   };
-
-//   return (
-//     <div className="dashboard-container">
-//       {tailor ? (
-//         <>
-//           <h1>Welcome, {tailor.fullName}!</h1>
-//           {tailor.profilePicture && (
-//             // <img src={tailor.profilePicture} className="profile-picture" alt="profile" />
-//             <img src="/images/tailor-profile.jpg" className="profile-picture" alt="profile" />
-//           )}
-//           <div className="user-details">
-//             <p><strong>Full Name:</strong> {tailor.fullName}</p>
-//             <p><strong>Email:</strong> {tailor.email}</p>
-//             <p><strong>Phone Number:</strong> {tailor.phone || "Not Provided"}</p>
-//             <p><strong>Role:</strong> {tailor.role}</p>
-//             <p><strong>Locality:</strong> {tailor.locality || "Not Provided"}</p>
-//             <p><strong>Skills:</strong> {tailor.skills || "Not Provided"}</p>
-//             <p><strong>Availability:</strong> {tailor.availability || "Not Provided"}</p>
-//           </div>
-
-//           <button className="back-button" onClick={handleBack}>Back</button>
-//           <button className="logout-button1" onClick={handleLogout1}>Logout</button>
-//         </>
-//       ) : (
-//         <h1>Loading your dashboard...</h1>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default TailorDashboard;
-
-
-
-
-
-
-
-
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../styles/tailordashboard.css";
-
-const TailorDashboard = () => {
-  const [tailor, setTailor] = useState(null);
-  const [requests, setRequests] = useState([]);
-  const [showRequests, setShowRequests] = useState(false); // ✅ new state
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
-    if (!loggedInUser) {
-      navigate("/login");
-      return;
-    }
-
-    if (loggedInUser.role !== "tailor") {
-      alert("Access denied! Only tailors can access this page.");
-      navigate("/login");
-      return;
-    }
-
-    setTailor(loggedInUser);
-
-    fetch(`http://localhost:5000/api/tailors/requests/tailor/${loggedInUser._id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const tailorRequests = data.filter(
-          (req) => req.tailor === loggedInUser._id
-        );
-        setRequests(tailorRequests);
-      })
-      .catch((err) => console.error("Error fetching requests:", err));
-  }, [navigate]);
-
-  const handleBack = () => {
-    navigate("/");
-  };
-
-  const handleLogout1 = () => {
-    localStorage.removeItem("loggedInUser");
-    navigate("/");
-  };
-
-
-
-
-  const updateRequestStatus = async (id, status) => {
-    try {
-      const res = await fetch(`http://localhost:5000/api/tailors/requests/${id}/status`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status }),
-      });
-  
-      if (res.ok) {
-        alert(`Request ${status}`);
-        setRequests((prev) =>
-          prev.map((req) => (req._id === id ? { ...req, status } : req))
-        );
-      } else {
-        const errMsg = await res.text();
-        alert("Error updating status: " + errMsg);
-      }
-    } catch (err) {
-      console.error("Error:", err);
-      alert("Something went wrong.");
-    }
-  };
-  
-
-
-
-
-//   const updateRequestStatus = async (id, status) => {
-//     try {
-//         const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-//       const res = await fetch(`http://localhost:5000/api/tailors/requests/${loggedInUser._id}/status`, {
-//         method: "PUT",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ status }),
-//       });
-
-//       if (res.ok) {
-//         alert(`Request ${status}`);
-//         setRequests((prev) =>
-//           prev.map((req) => (req._id === id ? { ...req, status } : req))
-//         );
-//       } else {
-//         const errMsg = await res.text();
-//         alert("Error updating status: " + errMsg);
-//       }
-//     } catch (err) {
-//       console.error("Error:", err);
-//       alert("Something went wrong.");
-//     }
-//   };
-
-  return (
-    <div className="tailor-container"> 
-    <div className="dashboard-container">
-      {tailor ? (
-        <>
-          <h1>Welcome, {tailor.fullName}!</h1>
-
-          {tailor.profilePicture && (
-            <img
-              src="/images/tailor-profile.jpg"
-              className="profile-picture"
-              alt="profile"
-            />
-          )}
-
-          <div className="user-details">
-            <p><strong>Full Name:</strong> {tailor.fullName}</p>
-            <p><strong>Email:</strong> {tailor.email}</p>
-            <p><strong>Phone Number:</strong> {tailor.phone || "Not Provided"}</p>
-            <p><strong>Role:</strong> {tailor.role}</p>
-            <p><strong>Locality:</strong> {tailor.locality || "Not Provided"}</p>
-            <p><strong>Skills:</strong> {tailor.skills || "Not Provided"}</p>
-            <p><strong>Availability:</strong> {tailor.availability || "Not Provided"}</p>
-          </div>
-
-          <hr />
-          {/* ✅ Show Requests Button */}
-          <button onClick={() => setShowRequests(!showRequests)}>
-            {showRequests ? "Hide Requests" : "Show Requests"}
-          </button>
-
-          {/* ✅ Only show requests if showRequests is true */}
-          {showRequests && (
-            <>
-              <h2>Customer Requests</h2>
-
-              {requests.length === 0 ? (
-                <p>No requests found.</p>
-              ) : (
-                <div className="requests-list">
-                  {requests.map((req) => (
-                    <div key={req._id} className="request-card">
-                      <h3>{req.name}</h3>
-                      <p><strong>Email:</strong> {req.email}</p>
-                      <p><strong>Contact:</strong> {req.contact}</p>
-                      <p><strong>Details:</strong> {req.details}</p>
-                      <p><strong>Delivery Time:</strong> {req.time} hrs</p>
-                      <p><strong>Location:</strong> {req.location}</p>
-                      <p><strong>Status:</strong> {req.status}</p>
-
-                      {req.status === "pending" && (
-                        <div className="action-buttons">
-                          <button onClick={() => updateRequestStatus(req._id, "accepted")}>
-                            Accept
-                          </button>
-                          <button onClick={() => updateRequestStatus(req._id, "rejected")}>
-                            Reject
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </>
-          )}
-
-          <button className="back-button" onClick={handleBack}>Back</button>
-          <button className="logout-button1" onClick={handleLogout1}>Logout</button>
-        </>
-      ) : (
-        <h1>Loading your dashboard...</h1>
-      )}
-    </div>
-    </div>
-  );
-};
-
-export default TailorDashboard;
-
-
-
-
-
-
-
-
-
-// import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import "../styles/tailordashboard.css";
-
-// const TailorDashboard = () => {
-//   const [tailor, setTailor] = useState(null);
-//   const [requests, setRequests] = useState([]);
+//   const [showRequests, setShowRequests] = useState(false);
 //   const navigate = useNavigate();
 
 //   useEffect(() => {
@@ -287,14 +25,10 @@ export default TailorDashboard;
 
 //     setTailor(loggedInUser);
 
-//     // 🔁 Fetch requests for this tailor
-//     // fetch("http://localhost:5000/api/tailors/requests/tailor/67e18a7ed0f079c5a3378e06")
 //     fetch(`http://localhost:5000/api/tailors/requests/tailor/${loggedInUser._id}`)
 //       .then((res) => res.json())
 //       .then((data) => {
-//         const tailorRequests = data.filter(
-//           (req) => req.tailor === loggedInUser._id
-//         );
+//         const tailorRequests = data.filter((req) => req.tailor === loggedInUser._id);
 //         setRequests(tailorRequests);
 //       })
 //       .catch((err) => console.error("Error fetching requests:", err));
@@ -311,8 +45,7 @@ export default TailorDashboard;
 
 //   const updateRequestStatus = async (id, status) => {
 //     try {
-//         const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-//       const res = await fetch(`http://localhost:5000/api/tailors/requests/${loggedInUser._id}/status`, {
+//       const res = await fetch(`http://localhost:5000/api/tailors/requests/${id}/status`, {
 //         method: "PUT",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ status }),
@@ -334,64 +67,461 @@ export default TailorDashboard;
 //   };
 
 //   return (
-//     <div className="dashboard-container">
+//     <div className="tailor-container">
 //       {tailor ? (
-//         <>
-//           <h1>Welcome, {tailor.fullName}!</h1>
+//         <div className="dashboard-wrapper">
+//           {/* Left Side */}
+//           <div className="left-panel">
+//             <h1>Welcome, {tailor.fullName}!</h1>
+//             {tailor.profilePicture && (
+//               <img
+//                 src="/images/tailor-profile.jpg"
+//                 className="profile-picture"
+//                 alt="profile"
+//               />
+//             )}
 
-//           {tailor.profilePicture && (
-//             <img
-//               src="/images/tailor-profile.jpg"
-//               className="profile-picture"
-//               alt="profile"
-//             />
-//           )}
+//             <div className="user-details">
+//               <p><strong>Full Name:</strong> {tailor.fullName}</p>
+//               <p><strong>Email:</strong> {tailor.email}</p>
+//               <p><strong>Phone Number:</strong> {tailor.phone || "Not Provided"}</p>
+//               <p><strong>Role:</strong> {tailor.role}</p>
+//               <p><strong>Locality:</strong> {tailor.locality || "Not Provided"}</p>
+//               <p><strong>Skills:</strong> {tailor.skills || "Not Provided"}</p>
+//               <p><strong>Availability:</strong> {tailor.availability || "Not Provided"}</p>
+//             </div>
 
-//           <div className="user-details">
-//             <p><strong>Full Name:</strong> {tailor.fullName}</p>
-//             <p><strong>Email:</strong> {tailor.email}</p>
-//             <p><strong>Phone Number:</strong> {tailor.phone || "Not Provided"}</p>
-//             <p><strong>Role:</strong> {tailor.role}</p>
-//             <p><strong>Locality:</strong> {tailor.locality || "Not Provided"}</p>
-//             <p><strong>Skills:</strong> {tailor.skills || "Not Provided"}</p>
-//             <p><strong>Availability:</strong> {tailor.availability || "Not Provided"}</p>
+//             <button className="back-button" onClick={handleBack}>Back</button>
+//             <button className="logout-button1" onClick={handleLogout1}>Logout</button>
 //           </div>
 
-//           <hr />
-//           <h2>Customer Requests</h2>
+//           {/* Right Side */}
+//           <div className="right-panel">
+//             <button className="toggle-btn" onClick={() => setShowRequests(!showRequests)}>
+//               {showRequests ? "Hide Requests" : "Show Requests"}
+//             </button>
 
-//           {requests.length === 0 ? (
-//             <p>No requests found.</p>
-//           ) : (
-//             <div className="requests-list">
-//               {requests.map((req) => (
-//                 <div key={req._id} className="request-card">
-//                   <h3>{req.name}</h3>
-//                   <p><strong>Email:</strong> {req.email}</p>
-//                   <p><strong>Contact:</strong> {req.contact}</p>
-//                   <p><strong>Details:</strong> {req.details}</p>
-//                   <p><strong>Delivery Time:</strong> {req.time} hrs</p>
-//                   <p><strong>Location:</strong> {req.location}</p>
-//                   <p><strong>Status:</strong> {req.status}</p>
+//             {showRequests && (
+//               <>
+//                 <h2>Customer Requests</h2>
+//                 {requests.length === 0 ? (
+//                   <p>No requests found.</p>
+//                 ) : (
+//                   <div className="requests-list">
+//                     {requests.map((req) => (
+//                       <div key={req._id} className="request-card">
+//                         <h3>{req.name}</h3>
+//                         <p><strong>Email:</strong> {req.email}</p>
+//                         <p><strong>Contact:</strong> {req.contact}</p>
+//                         <p><strong>Details:</strong> {req.details}</p>
+//                         <p><strong>Delivery Time:</strong> {req.time} hrs</p>
+//                         <p><strong>Location:</strong> {req.location}</p>
+//                         <p><strong>Status:</strong> {req.status}</p>
 
-//                   {req.status === "pending" && (
-//                     <div className="action-buttons">
-//                       <button onClick={() => updateRequestStatus(req._id, "accepted")}>
-//                         Accept
-//                       </button>
-//                       <button onClick={() => updateRequestStatus(req._id, "rejected")}>
-//                         Reject
-//                       </button>
-//                     </div>
-//                   )}
-//                 </div>
-//               ))}
+//                         {req.status === "pending" && (
+//                           <div className="action-buttons">
+//                             <button className="accept-button" onClick={() => updateRequestStatus(req._id, "accepted")}>
+//                               Accept
+//                             </button>
+//                             <button  className="reject-button" onClick={() => updateRequestStatus(req._id, "rejected")}>
+//                               Reject
+//                             </button>
+//                           </div>
+//                         )}
+//                       </div>
+//                     ))}
+//                   </div>
+//                 )}
+//               </>
+//             )}
+//           </div>
+//         </div>
+//       ) : (
+//         <h1>Loading your dashboard...</h1>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default TailorDashboard;
+
+
+
+
+
+
+
+
+
+
+// // Keep your imports same
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/tailordb.css";
+
+const TailorDashboard = () => {
+  const [tailor, setTailor] = useState(null);
+  const [requests, setRequests] = useState([]);
+  const [showRequests, setShowRequests] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (!loggedInUser) {
+      navigate("/login");
+      return;
+    }
+
+    // if (loggedInUser.role !== "tailor")
+     if (loggedInUser.role?.toLowerCase() !== "tailor") {
+        
+      alert("Access denied! Only tailors can access this page.");
+      navigate("/login");
+      return;
+    }
+
+    setTailor(loggedInUser);
+
+    fetch(`http://localhost:5000/api/tailors/requests/tailor/${loggedInUser._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const tailorRequests = data.filter((req) => req.tailor === loggedInUser._id);
+        setRequests(tailorRequests);
+      })
+      .catch((err) => console.error("Error fetching requests:", err));
+  }, [navigate]);
+
+  const handleBack = () => {
+    navigate("/");
+  };
+
+  const handleLogout1 = () => {
+    localStorage.removeItem("loggedInUser");
+    navigate("/");
+  };
+
+  const updateRequestStatus = async (id, status) => {
+    let cost = null;
+
+    if (status === "accepted") {
+      cost = prompt("Enter the cost for this request:");
+
+      if (!cost || isNaN(cost)) {
+        alert("Invalid cost entered.");
+        return;
+      }
+    }
+
+    try {
+      const res = await fetch(`http://localhost:5000/api/tailors/requests/${id}/status`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status, cost }),
+      });
+
+      if (res.ok) {
+        alert(`Request ${status}`);
+        setRequests((prev) =>
+          prev.map((req) =>
+            req._id === id ? { ...req, status, cost: cost ?? req.cost } : req
+          )
+        );
+      }
+       else {
+        const errMsg = await res.text();
+        alert("Error updating status: " + errMsg);
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Something went wrong.");
+    }
+  };
+
+  return (
+    <div className="tailor-container">
+      {tailor ? (
+        <div className="dashboard-wrapper">
+          {/* Left Side */}
+          <div className="left-panel">
+            <h1>Welcome, {tailor.fullName}!</h1>
+            {tailor.profilePicture && (
+              <img
+                src="/images/tailor-profile.jpg"
+                className="profile-picture"
+                alt="profile"
+              />
+            )}
+
+            <div className="user-details">
+              <p><strong>Full Name:</strong> {tailor.fullName}</p>
+              <p><strong>Email:</strong> {tailor.email}</p>
+              <p><strong>Phone Number:</strong> {tailor.phone || "Not Provided"}</p>
+              <p><strong>Role:</strong> {tailor.role}</p>
+              <p><strong>Locality:</strong> {tailor.locality || "Not Provided"}</p>
+              <p><strong>Skills:</strong> {tailor.skills || "Not Provided"}</p>
+              <p><strong>Availability:</strong> {tailor.availability || "Not Provided"}</p>
+            </div>
+            <div className="button-group">
+            <button className="back-button" onClick={handleBack}>Back</button>
+            <button className="logout-button1" onClick={handleLogout1}>Logout</button>
+          </div>
+          </div>
+          {/* Right Side */}
+          <div className="right-panel">
+            <button className="toggle-btn" onClick={() => setShowRequests(!showRequests)}>
+              {showRequests ? "Hide Requests" : "Show Requests"}
+            </button>
+
+            {showRequests && (
+              <>
+                <h2>Customer Requests</h2>
+                {requests.length === 0 ? (
+                  <p>No requests found.</p>
+                ) : (
+                  <div className="requests-list">
+                    {requests.map((req) => (
+                      <div key={req._id} className="request-card">
+                        <h3>{req.name}</h3>
+                        <p><strong>Email:</strong> {req.email}</p>
+                        <p><strong>Contact:</strong> {req.contact}</p>
+                        <p><strong>Details:</strong> {req.details}</p>
+                        <p><strong>Delivery Time:</strong> {req.time} hrs</p>
+                        <p><strong>Location:</strong> {req.location}</p>
+                        <p><strong>Status:</strong> {req.status}</p>
+                        {req.cost && (
+                          <p><strong>Cost:</strong> ₹{req.cost}</p>
+                        )}
+
+                        {req.status === "pending" && (
+                          <div className="action-buttons">
+                            <button
+                              className="accept-button"
+                              onClick={() => updateRequestStatus(req._id, "accepted")}
+                            >
+                              Accept
+                            </button>
+                            <button
+                              className="reject-button"
+                              onClick={() => updateRequestStatus(req._id, "rejected")}
+                            >
+                              Reject
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      ) : (
+        <h1>Loading your dashboard...</h1>
+      )}
+    </div>
+  );
+};
+
+export default TailorDashboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // Keep your imports same
+// import React, { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import "../styles/tailordb.css";
+
+// const TailorDashboard = () => {
+//   const [tailor, setTailor] = useState(null);
+//   const [requests, setRequests] = useState([]);
+//   const [showRequests, setShowRequests] = useState(false);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+//     if (!loggedInUser) {
+//       navigate("/login");
+//       return;
+//     }
+
+//     if (loggedInUser.role !== "tailor") {
+//       alert("Access denied! Only tailors can access this page.");
+//       navigate("/login");
+//       return;
+//     }
+
+//     setTailor(loggedInUser);
+
+//     fetch(`http://localhost:5000/api/tailors/requests/tailor/${loggedInUser._id}`)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const tailorRequests = data
+//           .filter((req) => req.tailor === loggedInUser._id)
+//           .sort((a, b) => {
+//             if (a.status === "accepted") return -1;
+//             if (b.status === "accepted") return 1;
+//             return 0;
+//           });
+//         setRequests(tailorRequests);
+//       })
+//       .catch((err) => console.error("Error fetching requests:", err));
+//   }, [navigate]);
+
+//   const handleBack = () => {
+//     navigate("/");
+//   };
+
+//   const handleLogout1 = () => {
+//     localStorage.removeItem("loggedInUser");
+//     navigate("/");
+//   };
+
+//   const updateRequestStatus = async (id, status) => {
+//     let cost = null;
+
+//     if (status === "accepted") {
+//       cost = prompt("Enter the cost for this request:");
+
+//       if (cost === null || cost.trim() === "" || isNaN(cost)) {
+//         alert("Invalid cost entered.");
+//         return;
+//       }
+//     }
+
+//     try {
+//       const res = await fetch(`http://localhost:5000/api/tailors/requests/${id}/status`, {
+//         method: "PUT",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ status, cost }),
+//       });
+
+//       if (res.ok) {
+//         alert(`Request ${status}`);
+//         const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+//         const response = await fetch(`http://localhost:5000/api/tailors/requests/tailor/${loggedInUser._id}`);
+//         const updatedRequests = await response.json();
+//         const tailorRequests = updatedRequests
+//           .filter((req) => req.tailor === loggedInUser._id)
+//           .sort((a, b) => {
+//             if (a.status === "accepted") return -1;
+//             if (b.status === "accepted") return 1;
+//             return 0;
+//           });
+//         setRequests(tailorRequests);
+//       } else {
+//         const errMsg = await res.text();
+//         alert("Error updating status: " + errMsg);
+//       }
+//     } catch (err) {
+//       console.error("Error:", err);
+//       alert("Something went wrong.");
+//     }
+//   };
+
+//   return (
+//     <div className="tailor-container">
+//       {tailor ? (
+//         <div className="dashboard-wrapper">
+//           {/* Left Side */}
+//           <div className="left-panel">
+//             <h1>Welcome, {tailor.fullName}!</h1>
+//             {tailor.profilePicture && (
+//               <img
+//                 src="/images/tailor-profile.jpg"
+//                 className="profile-picture"
+//                 alt="profile"
+//               />
+//             )}
+
+//             <div className="user-details">
+//               <p><strong>Full Name:</strong> {tailor.fullName}</p>
+//               <p><strong>Email:</strong> {tailor.email}</p>
+//               <p><strong>Phone Number:</strong> {tailor.phone || "Not Provided"}</p>
+//               <p><strong>Role:</strong> {tailor.role}</p>
+//               <p><strong>Locality:</strong> {tailor.locality || "Not Provided"}</p>
+//               <p><strong>Skills:</strong> {tailor.skills || "Not Provided"}</p>
+//               <p><strong>Availability:</strong> {tailor.availability || "Not Provided"}</p>
 //             </div>
-//           )}
 
-//           <button className="back-button" onClick={handleBack}>Back</button>
-//           <button className="logout-button1" onClick={handleLogout1}>Logout</button>
-//         </>
+//             <button className="back-button" onClick={handleBack}>Back</button>
+//             <button className="logout-button1" onClick={handleLogout1}>Logout</button>
+//           </div>
+
+//           {/* Right Side */}
+//           <div className="right-panel">
+//             <button className="toggle-btn" onClick={() => setShowRequests(!showRequests)}>
+//               {showRequests ? "Hide Requests" : "Show Requests"}
+//             </button>
+
+//             {showRequests && (
+//               <>
+//                 <h2>Customer Requests</h2>
+//                 {requests.length === 0 ? (
+//                   <p>No requests found.</p>
+//                 ) : (
+//                   <div className="requests-list">
+//                     {requests.map((req) => (
+//                       <div key={req._id} className="request-card">
+//                         <h3>{req.name}</h3>
+//                         <p><strong>Email:</strong> {req.email}</p>
+//                         <p><strong>Contact:</strong> {req.contact}</p>
+//                         <p><strong>Details:</strong> {req.details}</p>
+//                         <p><strong>Delivery Time:</strong> {req.time} hrs</p>
+//                         <p><strong>Location:</strong> {req.location}</p>
+//                         <p><strong>Status:</strong> {req.status}</p>
+//                         {req.cost != null && (
+//                           <p><strong>Cost:</strong> ₹{req.cost}</p>
+//                         )}
+
+//                         {req.status === "pending" && (
+//                           <div className="action-buttons">
+//                             <button
+//                               className="accept-button"
+//                               onClick={() => updateRequestStatus(req._id, "accepted")}
+//                             >
+//                               Accept
+//                             </button>
+//                             <button
+//                               className="reject-button"
+//                               onClick={() => updateRequestStatus(req._id, "rejected")}
+//                             >
+//                               Reject
+//                             </button>
+//                           </div>
+//                         )}
+//                       </div>
+//                     ))}
+//                   </div>
+//                 )}
+//               </>
+//             )}
+//           </div>
+//         </div>
 //       ) : (
 //         <h1>Loading your dashboard...</h1>
 //       )}

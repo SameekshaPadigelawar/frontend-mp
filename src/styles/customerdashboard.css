@@ -149,6 +149,7 @@
 .customer-container .dashboard-container {
   max-width: 850px;
   margin: auto;
+  margin-top: 40px;
   background: linear-gradient(145deg, #242736, #1a1c27);
   padding: 40px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);

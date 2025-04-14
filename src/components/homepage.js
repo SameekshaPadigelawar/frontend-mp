@@ -85,30 +85,32 @@ const Navbar = () => {
 
 
 
+
+   
+
+
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log("Token from localStorage:", token);
-    setIsLoggedIn(!!token); // Set login state based on token presenc  
+    setIsLoggedIn(!!token); // Set login state based on token presence
+  
     if (token) {
       axios
         .get("http://localhost:5000/api/auth/users", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
-          console.log("API Response:", response.data); // Debug entire API response
+          console.log("API Response (Logged-in User):", response.data);
   
-          if (Array.isArray(response.data) && response.data.length > 0) {
-            const lastUser = response.data[response.data.length - 1];  // ✅ Get last user
-            setUser(lastUser);  
+          if (response.data.success && response.data.user) {
+            const currentUser = response.data.user; // ✅ Logged-in user only
+            setUser(currentUser);
             setIsLoggedIn(true);
-            localStorage.setItem("userRole", lastUser.role);  // ✅ Store role
-            localStorage.setItem("loggedInUser", JSON.stringify(lastUser)); // ✅ Correct
-
-            // localStorage.setItem("loggedInUser", lastUser.email);  // ✅ Store last user's email
-            localStorage.setItem("users", JSON.stringify(response.data));  // ✅ Store all users
-            console.log("Last User Role Saved:", lastUser.role);
+            localStorage.setItem("userRole", currentUser.role);  // ✅ Save role of logged-in user
+            localStorage.setItem("loggedInUser", JSON.stringify(currentUser)); // ✅ Save user details
           } else {
-            console.log("No user data found.");
+            console.log("No logged-in user found in response.");
           }
         })
         .catch((error) => {
@@ -116,8 +118,6 @@ const Navbar = () => {
           setIsLoggedIn(false);
         });
     }
-  
-  
   
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -128,6 +128,58 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  
+
+
+
+
+
+
+
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   console.log("Token from localStorage:", token);
+  //   setIsLoggedIn(!!token); // Set login state based on token presenc  
+  //   if (token) {
+  //     axios
+  //       .get("http://localhost:5000/api/auth/users", {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       })
+  //       .then((response) => {
+  //         console.log("API Response:", response.data); // Debug entire API response
+  
+  //         if (Array.isArray(response.data) && response.data.length > 0) {
+  //           const lastUser = response.data[response.data.length - 1];  // ✅ Get last user
+  //           setUser(lastUser);  
+  //           setIsLoggedIn(true);
+  //           localStorage.setItem("userRole", lastUser.role);  // ✅ Store role
+  //           localStorage.setItem("loggedInUser", JSON.stringify(lastUser)); // ✅ Correct
+
+  //           // localStorage.setItem("loggedInUser", lastUser.email);  // ✅ Store last user's email
+  //           localStorage.setItem("users", JSON.stringify(response.data));  // ✅ Store all users
+  //           console.log("Last User Role Saved:", lastUser.role);
+  //         } else {
+  //           console.log("No user data found.");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching user:", error);
+  //         setIsLoggedIn(false);
+  //       });
+  //   }
+  
+  
+  
+  //   const handleClickOutside = (event) => {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //       setShowDropdown(false);
+  //     }
+  //   };
+  
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => document.removeEventListener("mousedown", handleClickOutside);
+  // }, []);
   
   
 
@@ -191,17 +243,17 @@ const handleSearch = () => {
 
 
 
-const [userCount, setUserCount] = useState(0);
+// const [userCount, setUserCount] = useState(0);
  
-useEffect(() => {
-  axios.get("http://localhost:5000/api/users/total-users")
-    .then(res => {
-      setUserCount(res.data.count);
-    })
-    .catch(err => {
-      console.error("Error fetching user count:", err);
-    });
-}, []);
+// useEffect(() => {
+//   axios.get("http://localhost:5000/api/users/total-users")
+//     .then(res => {
+//       setUserCount(res.data.count);
+//     })
+//     .catch(err => {
+//       console.error("Error fetching user count:", err);
+//     });
+// }, []);
 
 
  
@@ -275,14 +327,14 @@ useEffect(() => {
       <div className="nav-links">
         <Link to="/">Home</Link>
         <a href="#header">About Us</a>
-        <Link to="/services">Services</Link>
+        <Link to="/services">TailorsList</Link>
         {!isLoggedIn && <Link to="/signup">SignUp</Link>}
         <Link to="/contact">Contact Us</Link>
       </div>
-      <div>
+      {/* <div> */}
       {/* <button className="nav-btn">Count: {userCount}</button> */}
-      <p>Count: {userCount}</p>
-    </div>
+      {/* <p>Count: {userCount}</p> */}
+    {/* </div> */}
     </nav>
   );
   
@@ -306,6 +358,21 @@ function Carousel() {
     return () => clearInterval(interval);
   }, []);
 
+
+  const [userCount, setUserCount] = useState(0);
+ 
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/users/total-users")
+      .then(res => {
+        setUserCount(res.data.count);
+      })
+      .catch(err => {
+        console.error("Error fetching user count:", err);
+      });
+  }, []);
+
+
+
   return (
     <div className="carousel">
       {images.map((image, i) => (
@@ -317,12 +384,19 @@ function Carousel() {
               <p>Connect with skilled tailors, get stitching estimates, and receive your outfits on time.</p>
               <button className="btn">Find a Tailor</button>
               <button className="btn outline">Join as a Tailor</button>
+              <br></br>
+              <br></br>
+            <div>
+      {/* <button className="nav-btn">Count: {userCount}</button> */}
+              <h2>Count: {userCount}</h2>
+            </div>
           </div>
         </div>
       ))}
       <button className="prev" onClick={prevSlide}>&#10094;</button>
       <button className="next" onClick={nextSlide}>&#10095;</button>
     </div>
+     
   );
 }
 
@@ -436,36 +510,4 @@ function Home() {
 }
 
 export default Home;       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
 

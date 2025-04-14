@@ -94,6 +94,9 @@
 
 //this above code is correct for signup
 
+
+
+
 // import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import "../styles/customerdashboard.css";
@@ -304,6 +307,165 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import "../styles/customerdashboard.css";
+
+// const CustomerDashboard = () => {
+//   const [customer, setCustomer] = useState(null);
+//   const [requests, setRequests] = useState([]);
+//   const [selectedRequestId, setSelectedRequestId] = useState(null);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const storedUser = localStorage.getItem("loggedInUser");
+
+//     if (!storedUser) {
+//       alert("Access Denied! Please log in first.");
+//       navigate("/");
+//       return;
+//     }
+
+//     const foundCustomer = JSON.parse(storedUser);
+
+//     if (!foundCustomer || foundCustomer.role !== "customer") {
+//       alert("Access Denied! Only customers can access.");
+//       navigate("/");
+//       return;
+//     }
+
+//     setCustomer(foundCustomer);
+
+//     // Fetching customer requests only if the customer is set
+//     const fetchRequests = async () => {
+//       try {
+//         const response = await fetch(`http://localhost:5000/api/requests/customer/${foundCustomer._id}`);
+        
+//         if (!response.ok) {
+//           throw new Error(`Error: ${response.statusText}`);
+//         }
+
+//         const data = await response.json();
+//         setRequests(data);
+//       } catch (err) {
+//         console.error("Error fetching requests:", err);
+//         alert("Failed to load requests.");
+//       }
+//     };
+
+//     fetchRequests();
+//   }, [navigate]);
+
+//   const handleLogout = () => {
+//     localStorage.removeItem("loggedInUser");
+//     localStorage.removeItem("token");
+//     navigate("/");
+//   };
+
+//   const handleBack = () => {
+//     navigate("/");
+//   };
+
+//   const toggleRequestStatus = (id) => {
+//     if (selectedRequestId === id) {
+//       setSelectedRequestId(null); // hide if same is clicked again
+//     } else {
+//       setSelectedRequestId(id); // show if different
+//     }
+//   };
+
+//   return (
+//     <div className="customer-container">
+//       <div className="dashboard-container">
+//         {customer ? (
+//           <>
+//             <h1>Welcome, {customer.fullName}!</h1>
+//             <div className="user-details">
+//               <p><strong>Full Name:</strong> {customer.fullName}</p>
+//               <p><strong>Email:</strong> {customer.email}</p>
+//               <p><strong>Phone:</strong> {customer.phone || "N/A"}</p>
+//               <p><strong>Role:</strong> {customer.role}</p>
+//             </div>
+//             <h2>Your Requests</h2>
+//             <ul>
+//               {requests.map((req, index) => (
+//                 <li key={index}>
+//                   Request {index + 1}
+//                   <button onClick={() => toggleRequestStatus(req._id)}>
+//                     {selectedRequestId === req._id ? "Hide Status" : "Show Status"}
+//                   </button>
+
+//                   {/* Show only if this request is selected */}
+//                   {selectedRequestId === req._id && (
+//                     <div className="request-details">
+//                       <p><strong>Details:</strong> {req.details}</p>
+//                       <p><strong>Status:</strong> {req.status}</p>
+//                       <p><strong>Tailor:</strong> {req.tailor?.fullName || "N/A"}</p>
+//                       {req.cost && <p><strong>Cost:</strong> ₹{req.cost}</p>}
+//                     </div>
+//                   )}
+//                 </li>
+//               ))}
+//             </ul>
+
+//             <button className="back-button1" onClick={handleBack}>Back</button>
+//             <button className="logout-button" onClick={handleLogout}>Logout</button>
+//           </>
+//         ) : (
+//           <h1>Loading your dashboard...</h1>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CustomerDashboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/customerdashboard.css";
@@ -316,7 +478,7 @@ const CustomerDashboard = () => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("loggedInUser");
-
+    const token = localStorage.getItem("token");
     if (!storedUser) {
       alert("Access Denied! Please log in first.");
       navigate("/");
@@ -333,14 +495,35 @@ const CustomerDashboard = () => {
 
     setCustomer(foundCustomer);
 
-    fetch(`http://localhost:5000/api/requests/customer/${foundCustomer._id}`)
-      .then((res) => res.json())
-      .then((data) => setRequests(data))
-      .catch((err) => {
-        console.error("Error fetching requests:", err);
-        alert("Failed to load requests.");
-      });
-  }, [navigate]);
+  //   fetch(`http://localhost:5000/api/requests/customer/${foundCustomer._id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setRequests(data))
+  //     .catch((err) => {
+  //       console.error("Error fetching requests:", err);
+  //       alert("Failed to load requests.");
+  //     });
+  // }, [navigate]);
+
+  // console.log("Fetching requests for customer ID:", foundCustomer._id);
+
+
+  fetch(`http://localhost:5000/api/tailors/requests/customer/${foundCustomer._id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Request failed");
+      return res.json();
+    })
+    .then((data) => setRequests(data))
+    .catch((err) => {
+      console.error("Error fetching requests:", err);
+      alert("Failed to load requests.");
+    });
+}, [navigate]);
+
+
 
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
@@ -359,7 +542,7 @@ const CustomerDashboard = () => {
       setSelectedRequestId(id); // show if different
     }
   };
-
+  
   return (
     <div className="customer-container"> 
     <div className="dashboard-container">
@@ -387,6 +570,15 @@ const CustomerDashboard = () => {
                     <p><strong>Details:</strong> {req.details}</p>
                     <p><strong>Status:</strong> {req.status}</p>
                     <p><strong>Tailor:</strong> {req.tailor?.fullName || "N/A"}</p>
+                    {/* {req.cost && <p><strong>Cost:</strong> ₹{req.cost}</p>} */}
+                    {/* <p><strong>Cost:</strong> ₹{req.cost !== undefined ? req.cost : "N/A"}</p> */}
+                    <p><strong>Cost:</strong> 
+                     {req.status === "accepted" && req.cost != null 
+                             ? ` ₹${req.cost}` 
+                      : " N/A"}
+                    </p>
+
+
                   </div>
                 )}
               </li>
@@ -405,4 +597,4 @@ const CustomerDashboard = () => {
 };
 
 export default CustomerDashboard;
-//this is for login nad to see requests as well
+// this is for login nad to see requests as well

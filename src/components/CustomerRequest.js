@@ -139,7 +139,7 @@
 
 
 
-//this below code is corrrect
+// //this below code is corrrect
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "../styles/customerrequest.css";
@@ -159,16 +159,35 @@ const CustomerRequest = () => {
   });
 
   // 🔁 Fetch latest customer on mount
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/api/auth/users")
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       const customers = data.filter(user => user.role === "customer");
+  //       const lastCustomer = customers[customers.length - 1];
+  //       setCustomerId(lastCustomer._id);
+  //     })
+  //     .catch(err => console.error("Error fetching customer:", err));
+  // }, []);
+
+
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/auth/users")
-      .then(res => res.json())
-      .then(data => {
-        const customers = data.filter(user => user.role === "customer");
-        const lastCustomer = customers[customers.length - 1];
-        setCustomerId(lastCustomer._id);
-      })
-      .catch(err => console.error("Error fetching customer:", err));
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      if (user.role === "customer") {
+        setCustomerId(user._id);
+      } else {
+        alert("Only customers can make requests.");
+        navigate("/");
+      }
+    } else {
+      alert("Please log in first.");
+      navigate("/");
+    }
   }, []);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -270,6 +289,146 @@ const CustomerRequest = () => {
 };
 
 export default CustomerRequest;
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import { Link, useNavigate, useParams } from "react-router-dom";
+// import "../styles/customerrequest.css";
+
+// const CustomerRequest = () => {
+//   const navigate = useNavigate();
+//   const { tailorId } = useParams(); // 🧵 Get tailor ID from URL
+//   const [customerId, setCustomerId] = useState(""); // 👤 Assume last customer for now
+
+//   const [formData, setFormData] = useState({
+//     customerName: "",
+//     email: "",
+//     contact: "",
+//     requestDetails: "",
+//     deliveryTime: "",
+//     customerLocation: "",
+//   });
+ 
+
+
+
+//   useEffect(() => {
+//     const storedUser = localStorage.getItem("loggedInUser");
+//     if (storedUser) {
+//       const user = JSON.parse(storedUser);
+//       if (user.role === "customer") {
+//         setCustomerId(user._id);
+//       } else {
+//         alert("Only customers can make requests.");
+//         navigate("/");
+//       }
+//     } else {
+//       alert("Please log in first.");
+//       navigate("/");
+//     }
+//   }, []);
+
+
+//   const handleChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+  
+//     const { customerName, email, contact, requestDetails, deliveryTime, customerLocation } = formData;
+  
+//     if (
+//       !customerName.trim() || !email.trim() || !contact.trim() ||
+//       !requestDetails.trim() || !deliveryTime || !customerLocation.trim()
+//     ) {
+//       alert("Please fill in all fields.");
+//       return;
+//     }
+  
+//     const requestBody = {
+//       customer: customerId,  // ✅ This is the logged-in customer's ID
+//       tailor: tailorId,
+//       name: customerName,
+//       email,
+//       contact,
+//       details: requestDetails,
+//       time: parseInt(deliveryTime, 10),
+//       location: customerLocation,
+//       status: "pending",
+//     };
+  
+//     try {
+//       const res = await fetch("http://localhost:5000/api/tailors/requests", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(requestBody),
+//       });
+  
+//       const data = await res.json();
+//       if (res.ok) {
+//         alert("Request Submitted Successfully!");
+//         navigate("/services");
+//       } else {
+//         alert("Error submitting request: " + JSON.stringify(data));
+//       }
+//     } catch (err) {
+//       console.error("Error submitting request:", err);
+//       alert("Something went wrong.");
+//     }
+//   };
+  
+
+//   return (
+//     <div className="customer-request-page">
+//       <button className="back-button" onClick={() => navigate("/services")}>
+//       ← Back 
+//     </button>
+//       <header><h1>Customer Request</h1></header>
+//       <nav><Link to="/">Home</Link></nav>
+
+//       <div className="request-container">
+//         <form className="customer-form" onSubmit={handleSubmit}>
+//           <h2>Submit Your Stitching Request</h2>
+
+//           <label>Your Name:</label>
+//           <input type="text" name="customerName" required value={formData.customerName} onChange={handleChange} />
+
+//           <label>Your Email:</label>
+//           <input type="email" name="email" required value={formData.email} onChange={handleChange} />
+
+//           <label>Contact Number:</label>
+//           <input type="tel" name="contact" required value={formData.contact} onChange={handleChange} />
+
+//           <label>What do you need stitched?</label>
+//           <textarea name="requestDetails" required value={formData.requestDetails} onChange={handleChange}></textarea>
+
+//           <label>Preferred Delivery Time (hrs):</label>
+//           <input type="number" name="deliveryTime" min="1" required value={formData.deliveryTime} onChange={handleChange} />
+
+//           <label>Your Location:</label>
+//           <input type="text" name="customerLocation" required value={formData.customerLocation} onChange={handleChange} />
+
+//           <button type="submit" className="submit-btn">Submit Request</button>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CustomerRequest;
+
+
 
 
 

@@ -284,27 +284,43 @@ const SubmitReview = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  // 🔍 Fetch latest customer
+
+
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/auth/users")
-      .then((res) => res.json())
-      .then((data) => {
-        // Filter users to get only customers
-        const customers = data.filter(user => user.role === "customer");
-  
-        // Get the last customer in the list
-        if (customers.length > 0) {
-          const lastCustomer = customers[customers.length - 1];
-          setCustomerId(lastCustomer._id);
-          console.log("Last customer ID:", lastCustomer._id);
-        } else {
-          console.warn("No customers found.");
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching users:", err);
-      });
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser && loggedInUser._id) {
+      setCustomerId(loggedInUser._id);
+      console.log("Logged-in customer ID:", loggedInUser._id);
+    } else {
+      console.warn("No logged-in user found.");
+    }
   }, []);
+  
+
+
+
+  // // 🔍 Fetch latest customer
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/api/auth/users")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // Filter users to get only customers
+  //       const customers = data.filter(user => user.role === "customer");
+  
+  //       // Get the last customer in the list
+  //       if (customers.length > 0) {
+  //         const lastCustomer = customers[customers.length - 1];
+  //         setCustomerId(lastCustomer._id);
+  //         console.log("Last customer ID:", lastCustomer._id);
+  //       } else {
+  //         console.warn("No customers found.");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error fetching users:", err);
+  //     });
+  // }, []);
   
 
   const handleSubmit = async (e) => {

@@ -60,7 +60,7 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/homepage";
+import Home from "./components/home-exp";
 import Signup from "./components/Signup";
 import Login1 from "./components/Login1";
 import Contact from "./components/Contact";

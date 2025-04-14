@@ -161,7 +161,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/tailordashboard.css"; 
-
+// import "../styles/tailordb.css"; 
 const TailorDashboard = () => {
   const [tailor, setTailor] = useState(null);
   const [requests, setRequests] = useState([]);
@@ -335,6 +335,7 @@ const TailorDashboard = () => {
     localStorage.removeItem("loggedInUser");
     navigate("/");
   };
+
 
   return (
     <div className="tailor-container"> 

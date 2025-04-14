@@ -265,42 +265,78 @@ const Login12 = () => {
 //   };
 
 
+// const handleLogin = async (e) => {
+//     e.preventDefault();
+//     setError(""); // Clear previous errors
+  
+//     try {
+//       const response = await axios.post("http://localhost:5000/api/auth/login", formData, {
+//         headers: { "Content-Type": "application/json" },
+//       });
+  
+//       console.log("Login Success:", response.data); // ✅ Debug log
+  
+//       if (!response.data.token || !response.data.user) {
+//         setError("Invalid server response.");
+//         return;
+//       }
+  
+//       // Store token & user data
+//       localStorage.setItem("token", response.data.token);
+//       localStorage.setItem("loggedInUser", JSON.stringify(response.data.user));
+  
+//       // Navigate based on role
+//       if (response.data.user?.role === "customer") {
+//         navigate("/customer-dashboard");
+//         // navigate("/");
+//       } else if (response.data.user?.role === "tailor") {
+//         navigate("/tailor-dashboard");
+//         // navigate("/");
+//       } else {
+//         navigate("/dashboard"); // Default page
+//       }
+//     } catch (err) {
+//       console.error("Login Error:", err.response?.data || err); // ✅ Debug log
+//       setError(err.response?.data?.msg || "Login failed. Please try again.");
+//     }
+//   };
 const handleLogin = async (e) => {
-    e.preventDefault();
-    setError(""); // Clear previous errors
-  
-    try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", formData, {
-        headers: { "Content-Type": "application/json" },
-      });
-  
-      console.log("Login Success:", response.data); // ✅ Debug log
-  
-      if (!response.data.token || !response.data.user) {
-        setError("Invalid server response.");
-        return;
-      }
-  
-      // Store token & user data
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("loggedInUser", JSON.stringify(response.data.user));
-  
-      // Navigate based on role
-      if (response.data.user?.role === "customer") {
-        navigate("/customer-dashboard");
-        // navigate("/");
-      } else if (response.data.user?.role === "tailor") {
-        navigate("/tailor-dashboard");
-        // navigate("/");
-      } else {
-        navigate("/dashboard"); // Default page
-      }
-    } catch (err) {
-      console.error("Login Error:", err.response?.data || err); // ✅ Debug log
+  e.preventDefault();
+  setError(""); // Clear previous errors
+
+  try {
+    const response = await axios.post("http://localhost:5000/api/auth/login", formData, {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    console.log("Login Success:", response.data); // ✅ Debug log
+
+    if (!response.data.token || !response.data.user) {
+      setError("Invalid server response.");
+      return;
+    }
+
+    // Store token & user data
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("loggedInUser", JSON.stringify(response.data.user));
+
+    // Navigate based on role
+    if (response.data.user?.role === "customer") {
+      navigate("/customer-dashboard");
+    } else if (response.data.user?.role === "tailor") {
+      navigate("/tailor-dashboard");
+    } else {
+      navigate("/dashboard"); // Default page
+    }
+  } catch (err) {
+    console.error("Login Error:", err.response?.data || err); // ✅ Debug log
+    if (err.response?.data?.msg?.includes("User not found")) {
+      setError("Don't have an account? Sign up now.");
+    } else {
       setError(err.response?.data?.msg || "Login failed. Please try again.");
     }
-  };
-  
+  }
+};
 
   return (
     <div className="loginpage">
@@ -323,14 +359,30 @@ const handleLogin = async (e) => {
         </form>
 
         {/* Signup suggestion if user doesn't have an account */}
-        {error.includes("Invalid Email or Password") && (
+        {/* {error.includes("Invalid Email or Password") && (
           <p className="signup-suggestion">
             Don't have an account?{" "}
             <span onClick={() => navigate("/signup")} className="signup-link">
               Sign Up
             </span>
           </p>
-        )}
+        )} */}
+
+
+      
+      {/* Sign-up suggestion if user doesn't have an account */}
+      {error === "Don't have an account? Sign up now." && (
+        <p className="signup-suggestion">
+          Don't have an account?{" "}
+          <span
+            onClick={() => navigate("/signup")}
+            className="signup-link"
+          >
+            Sign Up
+          </span>
+        </p>
+      )}
+
       </div>
     </div>
   );

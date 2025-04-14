@@ -88,11 +88,11 @@ body {
     gap: 20px;
     margin-left: 350px;
 }
-.navbar .nav-btn{
+/* .navbar .nav-btn{
     background: blue;
     width: 70px;
 
-}
+} */
 .navbar .nav-links a {
     color: white;
     text-decoration: none;
@@ -493,6 +493,7 @@ header p {
     width: 100%;
     text-align: left;
     font-size: 14px;
+    font-weight:bolder;
     color: #333;
     cursor: pointer;
     display: flex;
@@ -554,7 +555,7 @@ header p {
 /* Overlay */
 .overlay {
     position: absolute;
-    bottom: 25%;
+    bottom: 15%;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
