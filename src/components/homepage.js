@@ -83,13 +83,6 @@ const Navbar = () => {
   //   }
   // }, []);
 
-
-
-
-   
-
-
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log("Token from localStorage:", token);

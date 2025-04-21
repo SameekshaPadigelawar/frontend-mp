@@ -315,6 +315,20 @@ button {
 .tailor-container .reject-button:hover {
   background-color: #c62828;
 }
+.tailor-container .button-group {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+}
+.tailor-container .back-button {
+  background-color: #d46c62;
+  color: white;
+  margin-top: 0; /* Remove big margin */
+  margin-left: 0; /* Remove fixed margin */
+  position: static; /* Not fixed */
+}
+
 
 /* Logout and Back Buttons */
 .tailor-container .logout-button1 {
@@ -331,7 +345,7 @@ button {
 .tailor-container .logout-button1:hover {
   background: #b5564d;
 }
-
+/* 
 .tailor-container .back-button { 
   background-color: #7e5e44; 
    background-color: #d46c62;
@@ -339,7 +353,7 @@ button {
   color: white;
   margin-top: 575px;
   margin-left: 160px;
- }
+ } */
 
 .tailor-container .back-button:hover {
   background-color: #5d4433;
@@ -356,9 +370,4 @@ button {
     max-width: 100%;
   }
 }
-.tailor-container .button-group {
-  display: flex;
-  justify-content: flex-start; /* Align buttons to the left */
-  gap: 10px;
-  margin-top: 20px;
-}
+ 

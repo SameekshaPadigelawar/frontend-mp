@@ -194,10 +194,6 @@ const TailorDashboard = () => {
   
 
 
-
-
-
-
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   
@@ -293,9 +289,6 @@ const TailorDashboard = () => {
     }
   };
   
-
-
-
 
 
 

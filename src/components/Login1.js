@@ -309,7 +309,7 @@ const handleLogin = async (e) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    console.log("Login Success:", response.data); // ✅ Debug log
+    console.log("Login Response:", response.data); // Debug log
 
     if (!response.data.token || !response.data.user) {
       setError("Invalid server response.");
@@ -319,6 +319,9 @@ const handleLogin = async (e) => {
     // Store token & user data
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("loggedInUser", JSON.stringify(response.data.user));
+    
+    console.log("Stored Token:", response.data.token); // Debug log
+    console.log("Stored User:", response.data.user); // Debug log
 
     // Navigate based on role
     if (response.data.user?.role === "customer") {
@@ -326,10 +329,10 @@ const handleLogin = async (e) => {
     } else if (response.data.user?.role === "tailor") {
       navigate("/tailor-dashboard");
     } else {
-      navigate("/dashboard"); // Default page
+      navigate("/dashboard");
     }
   } catch (err) {
-    console.error("Login Error:", err.response?.data || err); // ✅ Debug log
+    console.error("Login Error:", err.response?.data || err);
     if (err.response?.data?.msg?.includes("User not found")) {
       setError("Don't have an account? Sign up now.");
     } else {

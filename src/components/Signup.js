@@ -131,7 +131,7 @@ function Login1() {
         console.log("Signup Response Data:", data); 
         localStorage.setItem("token", data.token); // ✅ Save token in localStorage
         alert("User registered successfully!");
-        window.location.href = "/";
+        window.location.href = "/login";
       } else {
         alert(data.msg);
       }

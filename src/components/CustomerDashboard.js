@@ -468,6 +468,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../styles/customerdashboard.css";
 
 const CustomerDashboard = () => {
@@ -542,7 +543,34 @@ const CustomerDashboard = () => {
       setSelectedRequestId(id); // show if different
     }
   };
+
+
+  const cancelRequest = async (id) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/tailors/requests/cancel/${id}`
+      );
   
+      console.log("Cancel success:", response.data);
+      alert("Order cancelled successfully.");
+  
+      // Update UI after cancellation
+      setRequests((prevRequests) =>
+        prevRequests.map((r) =>
+          r._id === id ? { ...r, status: "cancelled" } : r
+        )
+      );
+    } catch (err) {
+      console.error("Cancel error:", err.response?.data || err);
+      alert("Failed to cancel request.");
+    }
+  };
+  
+ 
+
+
+
+
   return (
     <div className="customer-container"> 
     <div className="dashboard-container">
@@ -577,7 +605,12 @@ const CustomerDashboard = () => {
                              ? ` ₹${req.cost}` 
                       : " N/A"}
                     </p>
-
+                   {/* Show Cancel Button only if status is not already cancelled */}
+    {req.status !== "cancelled" && (
+      <button onClick={() => cancelRequest(req._id)} style={{ marginTop: "50px", backgroundColor: "#e53935", color: "#fff", padding: "8px 12px", border: "none", borderRadius: "5px", cursor: "pointer" }}>
+        Cancel Order
+      </button>
+    )}
 
                   </div>
                 )}

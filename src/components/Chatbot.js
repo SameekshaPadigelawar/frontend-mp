@@ -214,7 +214,7 @@
 
 // export default Chatbot;
 
-
+//this above code is alos correct but without heading
 
 
 
@@ -292,3 +292,4 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
+//code with chatbot assisatant heading
