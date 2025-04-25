@@ -97,28 +97,67 @@ const Navbar = () => {
       navigate("/");
     };
   
-    // Search functionality
-    const handleSearch = () => {
-      if (!searchLocation?.trim()) return; // Prevent empty search
+// Search functionality
+     
+// const handleSearch = () => {
+//   if (!searchLocation?.trim()) return; // Prevent empty search
+
+//   // Retrieve all users from localStorage
+//   const allUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+//   console.log("All Users:", allUsers); // Debugging
+
+//   // Filter only tailors from users
+//   const tailors = allUsers.filter(user => user.role === "tailor");
   
-      const allUsers = JSON.parse(localStorage.getItem("users")) || [];
-      const tailors = allUsers.filter(user => user.role === "tailor");
+//   console.log("Filtered Tailors:", tailors); // Debugging
+
+//   // Ensure location is properly formatted
+//   const searchQuery = searchLocation.trim().toLowerCase();
+
+//   // Filter tailors based on locality (instead of location)
+//   const filteredTailors = tailors.filter(tailor => {
+//       const tailorLocality = tailor.locality?.trim().toLowerCase() || ""; // Fix: Use `locality`
+//       console.log(`Comparing: ${tailorLocality} with ${searchQuery}`);
+//       return tailorLocality.includes(searchQuery);
+//   });
+
+//   console.log("Final Filtered Tailors:", filteredTailors); // Debugging
+
+//   // Store filtered tailors & search location in localStorage
+//   localStorage.setItem("searchResults", JSON.stringify(filteredTailors));
+//   localStorage.setItem("searchLocation", searchLocation);
+
+//   // Redirect to search results page
+//   navigate("/search-results");
+// };
   
-      const searchQuery = searchLocation.trim().toLowerCase();
-  
-      // Ensure proper filtering for localities
-      const filteredTailors = tailors.filter(tailor => {
-        const tailorLocality = tailor.locality?.trim().toLowerCase() || ""; 
-        return tailorLocality.includes(searchQuery);
-      });
-  
-      localStorage.setItem("searchResults", JSON.stringify(filteredTailors));
-      localStorage.setItem("searchLocation", searchLocation);
-  
-      navigate("/search-results");
-    };
-  
-    
+const handleSearch = async () => {
+  if (!searchLocation?.trim()) return;
+
+  const searchQuery = searchLocation.trim().toLowerCase();
+
+  try {
+    // Fetch fresh users from backend
+    const res = await fetch("http://localhost:5000/api/auth/users");
+    const allUsers = await res.json();
+
+    const tailors = allUsers.filter(user => user.role === "tailor");
+
+    const filteredTailors = tailors.filter(tailor => {
+      const tailorLocality = tailor.locality?.trim().toLowerCase() || "";
+      return tailorLocality.includes(searchQuery);
+    });
+
+    localStorage.setItem("searchResults", JSON.stringify(filteredTailors));
+    localStorage.setItem("searchLocation", searchLocation);
+
+    navigate("/search-results");
+  } catch (err) {
+    console.error("Error fetching users:", err);
+  }
+};
+
   
     return (
         <nav className="navbar" id="nav">

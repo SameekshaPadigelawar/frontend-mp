@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c0d3c512.css",
+    "main.js": "/static/js/main.9174e20f.js",
+    "static/js/453.83090c52.chunk.js": "/static/js/453.83090c52.chunk.js",
+    "static/media/tailor-hp.png": "/static/media/tailor-hp.29926223f63a7f9a450e.png",
+    "static/media/tailors-hp3.jpg": "/static/media/tailors-hp3.388abd4af15765965915.jpg",
+    "static/media/tailor-hp3.jpg": "/static/media/tailor-hp3.df8bb8329b163db1446c.jpg",
+    "index.html": "/index.html",
+    "main.c0d3c512.css.map": "/static/css/main.c0d3c512.css.map",
+    "main.9174e20f.js.map": "/static/js/main.9174e20f.js.map",
+    "453.83090c52.chunk.js.map": "/static/js/453.83090c52.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c0d3c512.css",
+    "static/js/main.9174e20f.js"
+  ]
+}
