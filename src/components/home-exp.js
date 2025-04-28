@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/styles.css";
 
+
 const images = [
   { src: "/images/tailor-hp3.jpg", text: "Find Expert Tailors Near You, Hassle-Free!" },
   { src: "/images/tailor-hp.png", text: "Get stitching estimates and receive outfits on time!" },
   { src: "/images/tailors-hp3.jpg", text: "Custom Men's Tailoring Available!" }
 ];
+
 const Navbar = () => {
     const [user, setUser] = useState(null);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -219,6 +221,7 @@ const handleSearch = async () => {
     
     
     function Carousel() {
+      const navigate = useNavigate();
       const [index, setIndex] = useState(0);
     
       const nextSlide = () => {
@@ -246,6 +249,13 @@ const handleSearch = async () => {
             console.error("Error fetching user count:", err);
           });
       }, []);
+      const handleFindTailor = () => {
+        navigate("/services");
+      };
+    
+      const handleJoinTailor = () => {
+        navigate("/signup");
+      };
     
     
     
@@ -258,8 +268,8 @@ const handleSearch = async () => {
                 {/* <h2>{image.text}</h2> */}
                 <h2>Find Expert Tailors Near You, Hassle-Free!</h2>
                   <p>Connect with skilled tailors, get stitching estimates, and receive your outfits on time.</p>
-                  <button className="btn">Find a Tailor</button>
-                  <button className="btn outline">Join as a Tailor</button>
+                  <button onClick={handleFindTailor} class="btn">Find a Tailor</button>
+                  <button onClick={handleJoinTailor} class="btn outline">Join as a Tailor</button>
                   <br></br>
                   <br></br>
                 <div>
